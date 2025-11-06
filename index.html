@@ -29,12 +29,9 @@
             color: var(--color-text-dark);
             background: var(--color-background-light);
             overflow-x: hidden;
-            /* Bloque le défilement du corps de page par défaut pour le préchargeur */
-            overflow: hidden; 
         }
 
-        /* --- STYLES PRELOADER (Ajustés) --- */
-        #preloader {
+          #preloader {
             position: fixed;
             top: 0;
             left: 0;
@@ -60,8 +57,7 @@
             text-align: center;
             animation: fadeInUp 0.8s ease-out;
         }
-        
-        /* NOTE: Le logo-container est réutilisé ici pour le preloader, il faut le différencier de celui du header si nécessaire, mais ici c'est bon */
+
         .logo-container {
             position: relative;
             margin-bottom: 40px;
@@ -117,8 +113,7 @@
         .loading-text {
             font-size: 14px;
             letter-spacing: 3px;
-            /* CORRECTION: var(--color-dark) n'existe pas, remplacé par la variable standard */
-            color: var(--color-text-dark); 
+            color: var(--color-dark);
             font-weight: 500;
             text-transform: uppercase;
             animation: textPulse 1.5s ease-in-out infinite;
@@ -173,51 +168,114 @@
 
         /* Animations */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes logoGlow {
-            0%, 100% { filter: drop-shadow(0 10px 25px rgba(168, 126, 53, 0.15)); }
-            50% { filter: drop-shadow(0 15px 35px rgba(168, 126, 53, 0.3)); }
-        }
-        @keyframes circleProgress {
-            0% { stroke-dashoffset: 440; transform: rotate(0deg); }
-            50% { stroke-dashoffset: 110; }
-            100% { stroke-dashoffset: 440; transform: rotate(360deg); }
-        }
-        @keyframes progressBar {
-            0% { width: 0%; }
-            50% { width: 70%; }
-            100% { width: 100%; }
-        }
-        @keyframes textPulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-        @keyframes dotPulse {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-        @keyframes particleFloat {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Responsive Preloader */
-        @media (max-width: 768px) {
-            .preloader-logo { width: 150px; }
-            .circle-loader { width: 180px; height: 180px; }
-            .progress-bar-container { width: 150px; }
-            .loading-text { font-size: 12px; }
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
-        
-        /* --- FIN STYLES PRELOADER --- */
+
+        @keyframes logoGlow {
+            0%, 100% {
+                filter: drop-shadow(0 10px 25px rgba(168, 126, 53, 0.15));
+            }
+            50% {
+                filter: drop-shadow(0 15px 35px rgba(168, 126, 53, 0.3));
+            }
+        }
+
+        @keyframes circleProgress {
+            0% {
+                stroke-dashoffset: 440;
+                transform: rotate(0deg);
+            }
+            50% {
+                stroke-dashoffset: 110;
+            }
+            100% {
+                stroke-dashoffset: 440;
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes progressBar {
+            0% {
+                width: 0%;
+            }
+            50% {
+                width: 70%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes textPulse {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .preloader-logo {
+                width: 150px;
+            }
+
+            .circle-loader {
+                width: 180px;
+                height: 180px;
+            }
+
+            .progress-bar-container {
+                width: 150px;
+            }
+
+            .loading-text {
+                font-size: 12px;
+            }
+        }
 
 
         /* HEADER - Fluidité et Professionnalisme */
@@ -247,17 +305,14 @@
             height: 90px;
         }
 
-        /* Utilisation de .header .logo-container pour éviter un conflit avec .preloader-content .logo-container */
-        .header .logo-container {
+        .logo-container {
             display: flex;
             align-items: center;
             height: 100%;
             padding: 15px 0;
-            margin-bottom: 0; /* Annule le style preloader */
-            animation: none; /* Annule l'animation preloader */
         }
 
-        .header .logo-container img {
+        .logo-container img {
             height: 60px;
             width: auto;
             max-width: 280px;
@@ -265,7 +320,7 @@
             transition: all var(--transition-speed);
         }
 
-        /* Navigation DESKTOP */
+        /* Navigation - Effet Premium */
         .nav-links {
             display: flex;
             gap: 40px;
@@ -296,21 +351,13 @@
             transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             color: var(--color-primary);
         }
-        
-        /* STYLE ACTIF DESKTOP */
-        .nav-links a:hover::after,
-        .nav-links a.active::after { /* Style pour la classe active au clic */
+
+        .nav-links a:hover::after, .nav-links a.active::after {
             width: 100%;
         }
-
-        .nav-links a.active { /* Style pour la classe active au clic */
-            color: var(--color-primary);
-            font-weight: 600;
-        }
-
 
         /* --- STYLES MENU BURGER (Mobile) --- */
         /* NOUVEAU : Bouton Burger */
@@ -320,7 +367,7 @@
             width: 30px;
             height: 20px;
             position: relative;
-            z-index: 1001; /* Doit être au-dessus du menu */
+            z-index: 1001; 
         }
 
         .bar {
@@ -343,104 +390,17 @@
         .menu-toggle.active .bar:nth-child(3) {
             transform: translateY(-7px) rotate(-45deg);
         }
-        
-        @media (max-width: 1024px) {
-            .nav-container {
-                padding: 0 40px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            /* Afficher le bouton menu burger */
-            .menu-toggle {
-                display: block;
-            }
-
-            /* Styles Menu Mobile */
-            .nav-links {
-                position: fixed;
-                top: 0; 
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: var(--color-secondary); 
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 30px;
-                transform: translateX(100%); /* Caché à droite par défaut */
-                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-                z-index: 999;
-                padding-top: 50px; /* Espace pour le logo/header */
-            }
-            
-            /* Menu ouvert */
-            .nav-links.active {
-                transform: translateX(0);
-                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-            }
-            
-            .nav-links a {
-                color: var(--color-text-light); 
-                font-size: 24px;
-                padding: 15px 0;
-                letter-spacing: 2px;
-                font-weight: 500;
-                text-transform: uppercase;
-                width: 80%;
-                text-align: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .nav-links li:last-child a {
-                border-bottom: none;
-            }
-            
-            .nav-links a::after {
-                content: none; /* Désactiver l'underline au survol par défaut */
-            }
-            
-            /* STYLE ACTIF MOBILE */
-            .nav-links a.active {
-                color: var(--color-primary); 
-                font-weight: 700;
-                transform: scale(1.05);
-                text-shadow: 0 0 10px rgba(168, 126, 53, 0.5);
-            }
-            
-            /* Rétablissement des autres media queries */
-            .nav-container {
-                padding: 0 20px;
-                height: 70px;
-            }
-            
-            .header .logo-container img {
-                height: 50px;
-            }
-            
-            /* Les autres styles responsive restent inchangés */
-            .hero { margin-top: 70px; padding: 60px 20px; background-attachment: scroll; }
-            .hero-content h1 { font-size: 2.5rem; letter-spacing: 5px; }
-            .hero-logo { max-width: 250px; }
-            .hero-content .subtitle { font-size: 1.1rem; letter-spacing: 1px; }
-            .cta-primary, .cta-secondary { display: block; margin: 15px auto; max-width: 300px; }
-            .services-grid { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .section { padding: 80px 20px; }
-            .section-title { font-size: 2.2rem; letter-spacing: 2px; }
-            .section-subtitle { font-size: 1rem; margin-bottom: 50px; }
-            .about-text h3 { font-size: 2rem; }
-        }
         /* --- FIN STYLES MENU BURGER --- */
 
 
-        /* Hero Section (restent inchangés) */
+        /* Hero Section - Image de fond agréable (fond.jpg) */
         .hero {
+            /* Utilisation de fond.jpg comme image de fond */
             background: var(--color-secondary);
             background-image: url("images/fond.jpg");
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: fixed; /* Parallaxe subtile pour la fluidité */
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -453,6 +413,7 @@
             overflow: hidden;
         }
 
+        /* Surcouche pour lisibilité */
         .hero::before {
             content: '';
             position: absolute;
@@ -460,26 +421,40 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.4); /* Surcouche plus intense pour le contraste pro */
             z-index: 1;
         }
-        /* ... autres styles de section ... */
+
         .hero-content {
             max-width: 1200px;
             width: 100%;
             z-index: 2;
         }
 
+        /* Logo Hero (Gardé pour le contenu, mais stylisé) */
         .hero-logo-container {
             margin-bottom: 60px;
         }
-        
+
+        .hero-logo {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            filter: drop-shadow(0 15px 40px rgba(0,0,0,0.6));
+            border-radius: 5px;
+            opacity: 0.95;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Typographie de Luxe */
         .hero-content h1 {
             font-family: 'Playfair Display', serif;
             font-size: 4.2rem;
             margin-bottom: 25px;
             font-weight: 900;
-            letter-spacing: 12px;
+            letter-spacing: 12px; /* Écartement accru pour l'opulence */
             text-transform: uppercase;
             line-height: 1.1;
             text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
@@ -498,6 +473,7 @@
             line-height: 1.6;
         }
 
+        /* Boutons CTA - Raffinés et réactifs */
         .cta-primary, .cta-secondary {
             display: inline-block;
             padding: 18px 50px;
@@ -538,6 +514,7 @@
             box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2);
         }
 
+        /* Sections - Fluidité à l'apparition */
         .section {
             padding: 120px 60px;
             max-width: 1440px;
@@ -583,6 +560,7 @@
             transition: all var(--transition-speed);
         }
 
+        /* Services Grid - Cartes plus élégantes */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -679,6 +657,7 @@
             font-weight: 700;
         }
 
+        /* About Section */
         .about-section {
             background: var(--color-background-grey);
         }
@@ -716,7 +695,7 @@
             margin-bottom: 25px;
             line-height: 2.0;
             font-weight: 400;
-            text-align: justify;
+            text-align: justify; /* Aspect professionnel */
         }
 
         .stats-grid {
@@ -759,6 +738,7 @@
             text-transform: uppercase;
         }
 
+        /* Contact Section - SOMBRE et CHIC */
         .contact-section {
             background: linear-gradient(135deg, var(--color-secondary) 0%, #222222 100%);
             color: var(--color-text-light);
@@ -867,7 +847,7 @@
             letter-spacing: 0.8px;
             border-top: 3px solid var(--color-primary);
         }
-        
+
         /* Responsive Design */
         @media (max-width: 1200px) {
              .services-grid {
@@ -900,9 +880,128 @@
             }
         }
 
+        @media (max-width: 768px) {
+            /* Afficher le bouton menu burger */
+            .menu-toggle {
+                display: block; 
+            }
+            
+            /* Styles Menu Mobile */
+            .nav-links {
+                position: fixed;
+                top: 0; 
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--color-secondary); 
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transform: translateX(100%); /* Caché à droite par défaut */
+                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                z-index: 999;
+                padding-top: 50px; 
+            }
+            
+            /* Menu ouvert */
+            .nav-links.active {
+                transform: translateX(0);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+            
+            .nav-links a {
+                color: var(--color-text-light); 
+                font-size: 24px;
+                padding: 15px 0;
+                letter-spacing: 2px;
+                font-weight: 500;
+                text-transform: uppercase;
+                width: 80%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links li:last-child a {
+                border-bottom: none;
+            }
+            
+            .nav-links a::after {
+                content: none; 
+            }
+            
+            /* STYLE ACTIF MOBILE (Accueil) */
+            .nav-links a[href="index.html"].active {
+                color: var(--color-primary); 
+                font-weight: 700;
+                transform: scale(1.05);
+                text-shadow: 0 0 10px rgba(168, 126, 53, 0.5);
+            }
+
+            .nav-container {
+                padding: 0 20px;
+                height: 70px;
+            }
+
+            .logo-container img {
+                height: 50px;
+            }
+
+            .hero {
+                margin-top: 70px;
+                padding: 60px 20px;
+                background-attachment: scroll; /* Désactiver la parallaxe sur mobile */
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+                letter-spacing: 5px;
+            }
+
+            .hero-logo {
+                max-width: 250px;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+            }
+
+            .cta-primary, .cta-secondary {
+                display: block;
+                margin: 15px auto;
+                max-width: 300px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 50px;
+            }
+            
+            .about-text h3 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
-<body onload="setActiveLink('accueil');">
+<body>
     <div id="preloader">
         <div class="particles">
             <div class="particle"></div>
@@ -936,25 +1035,23 @@
             </div>
         </div>
     </div>
+
     <header class="header">
         <nav class="nav-container">
             <div class="logo-container">
                 <img src="images/logo.png" alt="Victor Luther Agency & Services" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%2260%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 letter-spacing=%223%22 fill=%22%231a1a1a%22%3EVICTOR LUTHER%3C/text%3E%3C/svg%3E';">
             </div>
-            
             <ul class="nav-links" id="nav-links">
-                <li><a href="index.html" data-target="accueil">Accueil</a></li> 
-                <li><a href="apropos.html" data-target="apropos">À Propos</a></li>
-                <li><a href="services.html" data-target="services">Services</a></li>
-                <li><a href="contact.html" data-target="contact">Contact</a></li>
+                <li><a href="index.html" class="active">Accueil</a></li>
+ 		<li><a href="apropos.html">À Propos</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
-
             <div class="menu-toggle" id="menu-toggle">
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
-
         </nav>
     </header>
 
@@ -965,8 +1062,8 @@
             <h1>Excellence & Expertise</h1>
             <p class="subtitle">Solutions immobilières intégrées et services premium pour une clientèle exigeante</p>
             <div>
-                <a href="services.html" class="cta-primary">Nos Services</a>
-                <a href="contact.html" class="cta-secondary">Nous Contacter</a>
+                <a href="#services" class="cta-primary">Nos Services</a>
+                <a href="#contact" class="cta-secondary">Nous Contacter</a>
             </div>
         </div>
     </section>
@@ -1120,46 +1217,29 @@
     </footer>
 
     <script>
-        // Fonction utilitaire pour gérer la classe active
-        function setActiveLink(targetId) {
-            const navLinksList = document.querySelectorAll('#nav-links a');
-            navLinksList.forEach(link => {
-                link.classList.remove('active');
-            });
-            // Trouver le lien correspondant à l'ID cible et lui ajouter la classe 'active'
-            const correspondingLink = document.querySelector(`#nav-links a[data-target="${targetId}"]`);
-            if (correspondingLink) {
-                correspondingLink.classList.add('active');
-            }
-        }
-        
-        // --- INITIALISATION (S'assure que 'Accueil' est actif au chargement) ---
-        // La fonction setActiveLink('accueil'); est appelée via l'attribut 'onload' du <body>
-
-
-        // --- GESTION DU PRELOADER (Défilement garanti) ---
+        // Gestion du preloader
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             const body = document.body;
             
+            // Délai minimum pour une expérience visuelle fluide
             setTimeout(function() {
                 preloader.classList.add('loaded');
                 
+                // Suppression du preloader et réactivation du scroll
                 setTimeout(function() {
                     preloader.style.display = 'none';
-                    // CORRECTION MAJEURE: Force le défilement du body à être visible
-                    body.style.overflow = 'visible'; 
+                    body.style.overflow = '';
                 }, 800);
-            }, 500); 
+            }, 500); // Délai de 500ms pour garantir que l'animation soit vue
         });
-
-
+        
         // --- GESTION DU MENU BURGER ET DU SCROLL MOBILE ---
         const menuToggle = document.getElementById('menu-toggle');
         const navLinks = document.getElementById('nav-links');
         const body = document.body;
-        const preloader = document.getElementById('preloader'); 
-
+        
+        // Gérer le clic sur le menu toggle
         if (menuToggle && navLinks) {
             menuToggle.addEventListener('click', function() {
                 const isActive = this.classList.toggle('active');
@@ -1168,57 +1248,59 @@
                 // Gère le blocage/déblocage du scroll pour le menu mobile
                 if (isActive) {
                     body.style.overflow = 'hidden';
-                } else if (preloader.style.display === 'none') {
-                    // Force le défilement visible après la fermeture du menu
-                    body.style.overflow = 'visible'; 
+                } else {
+                    // Restaure le défilement normal (sauf si le preloader a fait des siennes)
+                    const preloader = document.getElementById('preloader');
+                    if (preloader && preloader.classList.contains('loaded')) {
+                        body.style.overflow = ''; // Utiliser '' pour restaurer le comportement par défaut
+                    } else {
+                        // Pour les cas où le preloader n'a pas encore fini
+                        body.style.overflow = '';
+                    }
                 }
             });
+            
+            // Fermer le menu si un lien est cliqué (pour la navigation sur la même page)
+            navLinks.querySelectorAll('a[href^="#"], a[href$=".html"]').forEach(link => {
+                 link.addEventListener('click', () => {
+                     // Petite temporisation pour laisser le temps à l'animation de scroll de se lancer
+                     setTimeout(() => {
+                         if (menuToggle.classList.contains('active')) {
+                             menuToggle.classList.remove('active');
+                             navLinks.classList.remove('active');
+                             body.style.overflow = '';
+                         }
+                     }, 400); 
+                 });
+            });
         }
-        
-        
-        // --- GESTION DE LA CLASSE ACTIVE (AU CLIC SEULEMENT) ET DU SMOOTH SCROLLING ---
+
+
+        // Smooth scrolling - WCAG 2.1 compliant
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
-                const href = this.getAttribute('href');
-                const targetId = href.substring(1); // Enlève le '#'
-                const target = document.querySelector(href);
-                
+                const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    // 1. Gère le Smooth Scroll (défilement fluide)
                     const headerOffset = 90;
                     const elementPosition = target.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
-                    
-                    // 2. Gère la Classe Active au clic
-                    setActiveLink(targetId);
-
-                    // 3. Fermer le menu mobile après le clic
-                    if (window.innerWidth <= 768) {
-                        menuToggle.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        body.style.overflow = 'visible'; 
-                    }
                 }
             });
         });
-        // --- FIN CLASSE ACTIVE/SMOOTH SCROLLING ---
-        
 
-        // Header scroll effect and Section visibility for Fluidity (MAINTENU)
-        const sections = document.querySelectorAll('.section');
+        // Header scroll effect and Section visibility for Fluidity
         const header = document.querySelector('.header');
+        const sections = document.querySelectorAll('.section');
         
         function checkVisibility() {
             sections.forEach(section => {
                 const sectionTop = section.getBoundingClientRect().top;
-                // Rendre la section visible (animation d'apparition) quand elle est à 80% de la hauteur de la fenêtre
+                // Rendre la section visible quand elle est à 80% de la hauteur de la fenêtre
                 if (sectionTop < window.innerHeight * 0.8) { 
                     section.classList.add('visible');
                 }
@@ -1235,15 +1317,15 @@
                 header.classList.remove('scrolled');
             }
             
-            checkVisibility(); // Vérifier la visibilité (pour l'animation d'apparition)
+            checkVisibility(); // Vérifier la visibilité au scroll
         });
         
         // Initial check for sections already in view
         window.addEventListener('load', checkVisibility);
         checkVisibility();
 
-        // Fallback for image (MAINTENU)
-        document.querySelector('.header .logo-container img').addEventListener('error', function() {
+        // Fallback for image (Keeping your original fallback but adding the 'fill' color for the SVG to match the theme)
+        document.querySelector('.logo-container img').addEventListener('error', function() {
             this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%2260%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 letter-spacing=%223%22 fill=%22%231a1a1a%22%3EVICTOR LUTHER%3C/text%3E%3C/svg%3E';
         });
 
