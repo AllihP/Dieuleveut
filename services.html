@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Services Détaillés - Victor Luther Agency & Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS pour gestion facile des couleurs */
+        :root {
+            --color-primary: #a87e35; /* Or/Bronze raffiné pour le luxe */
+            --color-secondary: #0d0d0d; /* Noir profond */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #f0f0f0;
+            --color-background-light: #ffffff;
+            --color-background-grey: #fafafa;
+            --transition-speed: 0.4s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--color-text-dark);
+            background: var(--color-background-light);
+            overflow-x: hidden;
+        }
+
+        /* HEADER - Réutilisation du style */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(5px);
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all var(--transition-speed) ease-in-out;
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        .logo-container {
+            height: 100%;
+            padding: 15px 0;
+        }
+
+        .logo-container img {
+            height: 60px;
+            max-width: 280px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--color-text-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--color-primary);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* --- STYLES MENU BURGER (Mobile) --- */
+        /* NOUVEAU : Bouton Burger */
+        .menu-toggle {
+            display: none; 
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 1001; 
+        }
+
+        .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-text-dark);
+            margin: 4px 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Animation 'X' */
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        /* --- FIN STYLES MENU BURGER --- */
+
+
+        /* Hero Services - Bannière plus courte */
+        .hero-services {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url("images/services.jpg"); /* Réutilisation de fond.jpg */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 40vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 180px 20px 80px;
+            margin-top: 90px;
+        }
+        
+        .hero-services h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+            color: var(--color-text-light);
+            margin-bottom: 10px;
+        }
+        
+        .hero-services p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        /* Contenu et sections détaillées */
+        .section {
+            padding: 120px 60px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            color: var(--color-text-dark);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: var(--color-primary);
+            margin: 25px auto 0;
+        }
+
+        /* Structure des blocs de service */
+        .service-block {
+            margin-bottom: 100px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--color-background-grey);
+            padding-bottom: 50px;
+        }
+        
+        /* Alternance des blocs pour un design dynamique */
+        .service-block:nth-child(even) {
+            grid-template-columns: 2fr 1fr;
+        }
+        
+        .service-block:nth-child(even) .service-details {
+            order: 2;
+        }
+        
+        .service-block:nth-child(even) .service-image {
+            order: 1;
+        }
+        
+        .service-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .service-title-container h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+        
+        .service-title-container p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .service-details p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .service-details ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+        
+        .service-details ul li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .service-details ul li::before {
+            content: '➤'; /* Flèche moderne */
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.4s ease;
+        }
+        
+        .service-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* CTA */
+        .cta-primary {
+            display: inline-block;
+            padding: 15px 40px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 14px;
+            text-decoration: none;
+            background: var(--color-primary);
+            color: var(--color-secondary);
+            border: 2px solid var(--color-primary);
+            border-radius: 3px;
+            margin-top: 30px;
+        }
+
+        .cta-primary:hover {
+            background: transparent;
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(168, 126, 53, 0.5);
+        }
+
+        /* Footer - Réutilisation du style */
+        footer {
+            background: var(--color-secondary);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 45px 20px;
+            font-size: 14px;
+            letter-spacing: 0.8px;
+            border-top: 3px solid var(--color-primary);
+            margin-top: 80px;
+        }
+
+        /* Responsive Design (mis à jour) */
+        @media (max-width: 1024px) {
+            .nav-container, .section {
+                padding: 0 40px;
+            }
+            .service-block {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .service-block:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+            .service-block:nth-child(even) .service-details,
+            .service-block:nth-child(even) .service-image {
+                order: initial;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Afficher le bouton menu burger */
+            .menu-toggle {
+                display: block; 
+            }
+
+            /* Styles Menu Mobile */
+            .nav-links {
+                position: fixed;
+                top: 0; 
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--color-secondary); 
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transform: translateX(100%); /* Caché à droite par défaut */
+                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                z-index: 999;
+                padding-top: 50px; 
+            }
+            
+            /* Menu ouvert */
+            .nav-links.active {
+                transform: translateX(0);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+            
+            .nav-links a {
+                color: var(--color-text-light); 
+                font-size: 24px;
+                padding: 15px 0;
+                letter-spacing: 2px;
+                font-weight: 500;
+                text-transform: uppercase;
+                width: 80%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links li:last-child a {
+                border-bottom: none;
+            }
+            
+            .nav-links a::after {
+                content: none; 
+            }
+            
+            /* STYLE ACTIF MOBILE */
+            .nav-links a.active {
+                color: var(--color-primary); 
+                font-weight: 700;
+                transform: scale(1.05);
+                text-shadow: 0 0 10px rgba(168, 126, 53, 0.5);
+            }
+            
+            .nav-container {
+                padding: 0 20px;
+                height: 70px;
+            }
+            
+            .hero-services h1 {
+                font-size: 2.5rem;
+                letter-spacing: 5px;
+            }
+
+            .hero-services {
+                padding: 140px 20px 60px;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+            
+            .service-title-container h2 {
+                font-size: 2rem;
+            }
+            
+            .service-image img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Victor Luther Agency & Services" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%2260%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 letter-spacing=%223%22 fill=%22%231a1a1a%22%3EVICTOR LUTHER%3C/text%3E%3C/svg%3E';">
+                </a>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="apropos.html">À Propos</a></li>
+                <li><a href="services.html">Services</a></li> 
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+        </nav>
+    </header>
+
+    <section class="hero-services">
+        <div class="hero-content">
+            <h1>Notre Offre Complète</h1>
+            <p>Découvrez l'étendue de nos expertises au service de vos ambitions.</p>
+        </div>
+    </section>
+
+    <section id="detail-services" class="section">
+        <h2 class="section-title">Nos Domaines d'Excellence</h2>
+        <div class="divider"></div>
+        
+        
+        <div class="service-block" id="gestion-immobiliere">
+            <div class="service-image">
+                <img src="images/gestion.jpg" alt="Gestion Immobilière" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 500 350%22%3E%3Crect width=%22500%22 height=%22350%22 fill=%22%23e9e9e9%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aaaaaa%22%3EGESTION IMMOBILIÈRE</text%3E%3C/svg%3E';">
+            </div>
+            <div class="service-details">
+                <div class="service-title-container">
+                    <h2>Gestion Immobilière</h2>
+                    <p>Maximisez la rentabilité et la sérénité de votre patrimoine immobilier.</p>
+                </div>
+                <p>Notre service de gestion immobilière est conçu pour les propriétaires et investisseurs recherchant une gestion déléguée, rigoureuse et transparente. Nous prenons en charge l'intégralité du cycle de vie de votre bien, de la sélection des locataires à l'optimisation fiscale.</p>
+                <ul>
+                    <li>Gestion Locative Complète : De la mise en location à l'entretien courant.</li>
+                    <li>Administration de Copropriétés : Expertise dans la gestion des parties communes et des assemblées générales.</li>
+                    <li>Suivi Financier : Comptabilité détaillée et rapports de performance trimestriels.</li>
+                    <li>Optimisation Fiscale : Conseils pour une meilleure déclaration de revenus fonciers.</li>
+                </ul>
+                <a href="index.html#contact" class="cta-primary">Demander un Audit</a>
+            </div>
+        </div>
+        
+        <div class="service-block" id="promotion-immobiliere">
+            <div class="service-details">
+                <div class="service-title-container">
+                    <h2>Promotion Immobilière</h2>
+                    <p>Création de valeur et développement de projets résidentiels et commerciaux.</p>
+                </div>
+                <p>Nous sommes le partenaire idéal pour le développement de vos projets. De l'étude de faisabilité à la commercialisation, nous maîtrisons chaque étape pour garantir le succès et la qualité des ouvrages.</p>
+                <ul>
+                    <li>Acquisition et Cession Stratégique : Identification et sécurisation de terrains à fort potentiel.</li>
+                    <li>Programmes Neufs : Développement de résidences de luxe et d'immeubles de bureaux.</li>
+                    <li>Commercialisation Exclusive : Mise en marché ciblée auprès d'une clientèle qualifiée.</li>
+                    <li>Gestion de Permis : Prise en charge administrative et réglementaire.</li>
+                </ul>
+                <a href="index.html#contact" class="cta-primary">Lancer un Projet</a>
+            </div>
+            <div class="service-image">
+                <img src="images/promotion.jpg" alt="Promotion Immobilière" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 500 350%22%3E%3Crect width=%22500%22 height=%22350%22 fill=%22%23e9e9e9%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aaaaaa%22%3EPROMOTION IMMOBILIÈRE</text%3E%3C/svg%3E';">
+            </div>
+        </div>
+        
+        <div class="service-block" id="conseil-expertise">
+            <div class="service-image">
+                <img src="images/imo.jpg" alt="Conseil & Expertise" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 500 350%22%3E%3Crect width=%22500%22 height=%22350%22 fill=%22%23e9e9e9%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aaaaaa%22%3ECONSEIL & EXPERTISE</text%3E%3C/svg%3E';">
+            </div>
+            <div class="service-details">
+                <div class="service-title-container">
+                    <h2>Conseil & Expertise</h2>
+                    <p>Des analyses stratégiques pointues pour des décisions d'investissement éclairées.</p>
+                </div>
+                <p>Notre équipe d'experts offre des services de consultation approfondie pour optimiser votre patrimoine. Nous fournissons des diagnostics précis et des recommandations stratégiques pour chaque situation unique, du simple investissement à la restructuration d'actifs.</p>
+                <ul>
+                    <li>Évaluation Patrimoniale : Estimation juste de la valeur de vos actifs immobiliers.</li>
+                    <li>Stratégie d'Investissement : Identification des meilleures opportunités de marché.</li>
+                    <li>Due Diligence : Audits complets avant acquisition ou cession.</li>
+                    <li>Gestion de Projets Complexes : Coordination de chantiers ou d'opérations multi-sites.</li>
+                </ul>
+                <a href="index.html#contact" class="cta-primary">Consulter nos Experts</a>
+            </div>
+        </div>
+
+        <div class="service-block" id="location-vehicules">
+            <div class="service-details">
+                <div class="service-title-container">
+                    <h2>Location de Véhicules Haut de Gamme</h2>
+                    <p>Une flotte de véhicules premium avec ou sans chauffeur pour un service d'exception.</p>
+                </div>
+                <p>Complémentaire à nos services immobiliers, nous proposons la location de véhicules de luxe pour répondre aux besoins de mobilité de notre clientèle. Que ce soit pour un voyage d'affaires ou un événement privé, nous assurons discrétion et ponctualité.</p>
+                <ul>
+                    <li>Flotte Moderne : Berlines, SUV et vans de dernière génération.</li>
+                    <li>Location Courte/Longue Durée : Solutions flexibles adaptées à vos exigences.</li>
+                    <li>Chauffeurs Professionnels : Personnel discret, multilingue et formé aux protocoles de sécurité.</li>
+                    <li>Assistance 24/7 : Disponibilité complète pour toutes vos requêtes logistiques.</li>
+                </ul>
+                <a href="index.html#contact" class="cta-primary">Réserver un Véhicule</a>
+            </div>
+            <div class="service-image">
+                <img src="images/vehicule.jpg" alt="Location de Véhicules" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 500 350%22%3E%3Crect width=%22500%22 height=%22350%22 fill=%22%23e9e9e9%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aaaaaa%22%3ELOCATION VÉHICULES</text%3E%3C/svg%3E';">
+            </div>
+        </div>
+        
+        <div class="service-block" id="ameublement-premium">
+            <div class="service-image">
+                <img src="images/ameublement.jpg" alt="Ameublement Premium" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 500 350%22%3E%3Crect width=%22500%22 height=%22350%22 fill=%22%23e9e9e9%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aaaaaa%22%3EAMEUBLEMENT PREMIUM</text%3E%3C/svg%3E';">
+            </div>
+            <div class="service-details">
+                <div class="service-title-container">
+                    <h2>Ameublement & Design d'Intérieur</h2>
+                    <p>Des espaces conçus pour l'excellence et le confort, reflet de votre prestige.</p>
+                </div>
+                <p>Nous collaborons avec des designers de renom pour créer des intérieurs qui allient esthétisme, fonctionnalité et luxe. Notre service clé en main couvre la conception, la fourniture de mobilier haut de gamme et l'installation complète.</p>
+                <ul>
+                    <li>Conception Sur Mesure : Plans 3D et conseils de style personnalisés.</li>
+                    <li>Fourniture Exclusive : Accès à des marques de mobilier de luxe internationales.</li>
+                    <li>Aménagement Résidentiel et Professionnel : Du logement privé au siège social.</li>
+                    <li>Gestion Clé en Main : Coordination des artisans et livraison des espaces prêts à vivre.</li>
+                </ul>
+                <a href="index.html#contact" class="cta-primary">Démarrer un Projet Design</a>
+            </div>
+        </div>
+
+        <div class="service-block" id="evenementiel">
+            <div class="service-details">
+                <div class="service-title-container">
+                    <h2>Organisation Événementielle</h2>
+                    <p>Des événements privés et corporatifs de prestige, gérés avec une logistique irréprochable.</p>
+                </div>
+                <p>Forts de notre accès à des lieux exclusifs (via notre portefeuille immobilier), nous organisons des événements qui marquent les esprits. Nous prenons en charge la logistique complète, de la sélection du traiteur à la gestion des invités, pour un résultat sans faute.</p>
+                <ul>
+                    <li>Location d'Espaces Prestigieux : Accès à des villas, lofts et lieux privés uniques.</li>
+                    <li>Logistique Intégrale : Sonorisation, éclairage, sécurité et gestion des prestataires.</li>
+                    <li>Événements Corporatifs : Lancements de produits, galas, séminaires.</li>
+                    <li>Événements Privés : Mariages, anniversaires, réceptions de luxe.</li>
+                </ul>
+                <a href="index.html#contact" class="cta-primary">Organiser un Événement</a>
+            </div>
+            <div class="service-image">
+                <img src="images/evenement.jpg" alt="Organisation Événementielle" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 500 350%22%3E%3Crect width=%22500%22 height=%22350%22 fill=%22%23e9e9e9%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aaaaaa%22%3EÉVÉNEMENTIEL</text%3E%3C/svg%3E';">
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Victor Luther Agency & Services. Tous droits réservés. | <a href="index.html" style="color: rgba(255,255,255,0.8);">Accueil</a></p>
+    </footer>
+
+    <script>
+        // --- GESTION DU MENU BURGER ET DU SCROLL MOBILE ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const body = document.body;
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function() {
+                const isActive = this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                
+                // Gère le blocage/déblocage du scroll pour le menu mobile
+                if (isActive) {
+                    body.style.overflow = 'hidden';
+                } else {
+                    // Force le défilement visible après la fermeture du menu
+                    body.style.overflow = 'visible'; 
+                }
+            });
+        }
+        
+        // Smooth scrolling pour les ancres internes et fermeture du menu mobile
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+
+                if (target) {
+                    // Smooth scroll
+                    window.scrollTo({
+                        top: target.offsetTop - 90, // Ajustement pour le header fixé
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Fermer le menu mobile après le clic
+                if (window.innerWidth <= 768) {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    body.style.overflow = 'visible'; 
+                }
+            });
+        });
+
+        // Marquer le lien "Services" comme actif
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname.split("/").pop();
+            // Utiliser le nom du fichier pour marquer l'actif, plus robuste.
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const linkHref = link.getAttribute('href').split("/").pop().split('#')[0]; // Ignorer les ancres
+                
+                // Si l'URL actuelle est services.html, on ajoute la classe active.
+                if (linkHref === 'services.html') {
+                    if (!link.classList.contains('active')) {
+                         link.classList.add('active');
+                    }
+                } else {
+                    // S'assurer que les autres liens n'ont pas la classe active
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

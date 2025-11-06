@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - Victor Luther Agency & Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS pour gestion facile des couleurs (répétées pour l'autonomie du fichier) */
+        :root {
+            --color-primary: #a87e35; /* Or/Bronze raffiné pour le luxe */
+            --color-secondary: #0d0d0d; /* Noir profond */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #f0f0f0;
+            --color-background-light: #ffffff;
+            --color-background-grey: #fafafa;
+            --transition-speed: 0.4s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--color-text-dark);
+            background: var(--color-background-light);
+            overflow-x: hidden;
+            /* La propriété overflow: hidden n'est pas nécessaire ici car il n'y a pas de préchargeur */
+        }
+
+        /* HEADER - Réutilisation du style */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(5px);
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all var(--transition-speed) ease-in-out;
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        .logo-container {
+            height: 100%;
+            padding: 15px 0;
+        }
+
+        .logo-container img {
+            height: 60px;
+            max-width: 280px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--color-text-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--color-primary);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* --- STYLES MENU BURGER (Mobile) --- */
+        /* NOUVEAU : Bouton Burger */
+        .menu-toggle {
+            display: none; 
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 1001; 
+        }
+
+        .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-text-dark);
+            margin: 4px 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Animation 'X' */
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        /* --- FIN STYLES MENU BURGER --- */
+
+
+        /* Hero AP - Plus compact et ciblé */
+        .hero-ap {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url("images/apropos.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 40vh; /* Moins haut que la page d'accueil */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 180px 20px 80px;
+            margin-top: 90px;
+        }
+        
+        .hero-ap h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+            color: var(--color-text-light);
+            margin-bottom: 10px;
+        }
+        
+        .hero-ap p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        /* Sections - Réutilisation du style */
+        .section {
+            padding: 120px 60px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            color: var(--color-text-dark);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 70px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: var(--color-primary);
+            margin: 25px auto 0;
+        }
+        
+        /* Section Histoire */
+        .history-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .history-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        .history-text p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 25px;
+            line-height: 2.0;
+            text-align: justify;
+        }
+
+        .history-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        /* Section Valeurs */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .value-card {
+            background: var(--color-background-grey);
+            padding: 50px 30px;
+            border-bottom: 4px solid var(--color-primary);
+            transition: all 0.4s ease;
+        }
+
+        .value-card:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .value-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .value-card p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        /* Footer - Réutilisation du style */
+        footer {
+            background: var(--color-secondary);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 45px 20px;
+            font-size: 14px;
+            letter-spacing: 0.8px;
+            border-top: 3px solid var(--color-primary);
+        }
+
+        /* Responsive Design (mis à jour) */
+        @media (max-width: 1024px) {
+            .nav-container, .section {
+                padding: 0 40px;
+            }
+
+            .history-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Afficher le bouton menu burger */
+            .menu-toggle {
+                display: block; 
+            }
+
+            /* Styles Menu Mobile */
+            .nav-links {
+                position: fixed;
+                top: 0; 
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--color-secondary); 
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transform: translateX(100%); /* Caché à droite par défaut */
+                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                z-index: 999;
+                padding-top: 50px; 
+            }
+            
+            /* Menu ouvert */
+            .nav-links.active {
+                transform: translateX(0);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+            
+            .nav-links a {
+                color: var(--color-text-light); 
+                font-size: 24px;
+                padding: 15px 0;
+                letter-spacing: 2px;
+                font-weight: 500;
+                text-transform: uppercase;
+                width: 80%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links li:last-child a {
+                border-bottom: none;
+            }
+            
+            .nav-links a::after {
+                content: none; 
+            }
+            
+            /* STYLE ACTIF MOBILE */
+            .nav-links a.active {
+                color: var(--color-primary); 
+                font-weight: 700;
+                transform: scale(1.05);
+                text-shadow: 0 0 10px rgba(168, 126, 53, 0.5);
+            }
+            
+            .nav-container {
+                padding: 0 20px;
+                height: 70px;
+            }
+            
+            .hero-ap h1 {
+                font-size: 2.5rem;
+                letter-spacing: 5px;
+            }
+
+            .hero-ap {
+                padding: 140px 20px 60px;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+            
+            .history-image {
+                order: -1; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Victor Luther Agency & Services" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%2260%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 letter-spacing=%223%22 fill=%22%231a1a1a%22%3EVICTOR LUTHER%3C/text%3E%3C/svg%3E';">
+                </a>
+            </div>
+            
+            <ul class="nav-links" id="nav-links"> 
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="apropos.html" class="active">À Propos</a></li> 
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+        </nav>
+    </header>
+
+    <section class="hero-ap">
+        <div class="hero-content">
+            <h1>Notre Histoire</h1>
+            <p>Rigueur, Passion et Engagement pour un service d'excellence.</p>
+        </div>
+    </section>
+
+    <section id="histoire" class="section">
+        <h2 class="section-title">L'Agence Victor Luther</h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Fondée il y a plus de 15 ans, notre agence est le fruit d'une vision simple : allier l'expertise immobilière à un bouquet de services premium inédit.</p>
+        
+        <div class="history-content">
+            <div class="history-text">
+                <h3>Les Fondations de l'Excellence</h3>
+                <p>Créée en 2008, Victor Luther Agency & Services a débuté son activité avec un focus sur la gestion immobilière de biens de prestige. Rapidement, la demande de nos clients pour des services complémentaires de haute qualité (logistique, événementiel, ameublement) nous a poussé à élargir notre champ d'expertise. Cette intégration de services diversifiés fait aujourd'hui notre force.</p>
+                
+                <h3>Une Croissance Mesurée et Stratégique</h3>
+                <p>Notre croissance n'a jamais dérogé à notre principe fondamental : la qualité avant la quantité. Chaque nouveau domaine d'activité est piloté par des experts reconnus pour garantir le même niveau d'excellence. Que ce soit pour un projet de promotion immobilière complexe ou l'aménagement intérieur d'une résidence, notre approche reste personnalisée et méticuleuse.</p>
+                
+                <h3>L'Innovation au Quotidien</h3>
+                <p>Nous investissons continuellement dans la technologie et la formation de nos équipes. Notre objectif est de simplifier les processus pour nos clients tout en offrant une analyse de marché pointue et des solutions à la pointe de l'innovation, notamment dans la gestion énergétique et le design durable.</p>
+            </div>
+            <div class="history-image">
+                <img src="images/expertise.jpg" alt="Image illustrant le professionnalisme et l'expertise" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 500 350%22%3E%3Crect width=%22500%22 height=%22350%22 fill=%22%23dddddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23888888%22%3EIMAGE D'HISTOIRE</text%3E%3C/svg%3E';">
+            </div>
+        </div>
+    </section>
+
+    <section id="valeurs" class="section" style="background: var(--color-background-grey);">
+        <h2 class="section-title">Notre Vision et Nos Valeurs</h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Des principes inébranlables qui guident chacune de nos décisions et interactions.</p>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <h3>Vision</h3>
+                <p>Être l'acteur de référence en Afrique dans l'intégration de solutions immobilières et de services de luxe, reconnue pour son expertise et son intégrité.</p>
+            </div>
+            
+            <div class="value-card">
+                <h3>Mission</h3>
+                <p>Offrir à notre clientèle une expérience utilisateur hors pair en simplifiant la gestion et la concrétisation de leurs projets les plus ambitieux, grâce à une approche personnalisée.</p>
+            </div>
+            
+            <div class="value-card">
+                <h3>Valeurs Clés</h3>
+                <p><strong>Rigueur :</strong> Chaque détail compte. <strong>Transparence :</strong> Une communication honnête et claire. <strong>Excellence :</strong> La recherche constante de la perfection dans nos prestations.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Victor Luther Agency & Services. Tous droits réservés. | <a href="index.html" style="color: rgba(255,255,255,0.8);">Accueil</a></p>
+    </footer>
+
+    <script>
+        // --- GESTION DU MENU BURGER ET DU SCROLL MOBILE ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const body = document.body;
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function() {
+                const isActive = this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                
+                // Gère le blocage/déblocage du scroll pour le menu mobile
+                if (isActive) {
+                    body.style.overflow = 'hidden';
+                } else {
+                    // Force le défilement visible après la fermeture du menu
+                    body.style.overflow = 'visible'; 
+                }
+            });
+        }
+        
+        // Smooth scrolling pour les ancres internes et fermeture du menu mobile
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                
+                if (target) {
+                    // Smooth scroll
+                    window.scrollTo({
+                        top: target.offsetTop - 90, // Ajustement pour le header fixé
+                        behavior: 'smooth'
+                    });
+                    
+                    // Fermer le menu mobile après le clic
+                    if (window.innerWidth <= 768) {
+                        menuToggle.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        body.style.overflow = 'visible'; 
+                    }
+                }
+            });
+        });
+
+        // Marquer le lien "À Propos" comme actif (logique conservée)
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname.split("/").pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const linkHref = link.getAttribute('href').split("/").pop();
+                if (linkHref === currentPath) {
+                    // S'assurer qu'il n'y ait pas de conflit avec la classe active du burger
+                    if (!link.classList.contains('active')) {
+                         link.classList.add('active');
+                    }
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

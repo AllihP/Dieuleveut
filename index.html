@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Luther Agency & Services - Immobilier & Services Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Variables CSS pour gestion facile des couleurs */
+        :root {
+            --color-primary: #a87e35; /* Or/Bronze raffiné pour le luxe */
+            --color-secondary: #0d0d0d; /* Noir profond */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #f0f0f0;
+            --color-background-light: #ffffff;
+            --color-background-grey: #fafafa;
+            --transition-speed: 0.4s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--color-text-dark);
+            background: var(--color-background-light);
+            overflow-x: hidden;
+            /* Bloque le défilement du corps de page par défaut pour le préchargeur */
+            overflow: hidden; 
+        }
+
+        /* --- STYLES PRELOADER (Ajustés) --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        #preloader.loaded {
+            opacity: 0;
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+
+        .preloader-content {
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* NOTE: Le logo-container est réutilisé ici pour le preloader, il faut le différencier de celui du header si nécessaire, mais ici c'est bon */
+        .logo-container {
+            position: relative;
+            margin-bottom: 40px;
+            animation: logoFloat 2s ease-in-out infinite;
+        }
+
+        .preloader-logo {
+            width: 200px;
+            height: auto;
+            filter: drop-shadow(0 10px 25px rgba(168, 126, 53, 0.15));
+            animation: logoGlow 2s ease-in-out infinite;
+        }
+
+        /* Cercle doré tournant autour du logo */
+        .circle-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 240px;
+            height: 240px;
+        }
+
+        .circle-loader circle {
+            fill: none;
+            stroke: var(--color-primary);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            animation: circleProgress 2s ease-in-out infinite;
+        }
+
+        /* Barre de progression moderne */
+        .progress-bar-container {
+            width: 200px;
+            height: 3px;
+            background: rgba(168, 126, 53, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            border-radius: 10px;
+            animation: progressBar 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(168, 126, 53, 0.5);
+        }
+
+        /* Texte de chargement élégant */
+        .loading-text {
+            font-size: 14px;
+            letter-spacing: 3px;
+            /* CORRECTION: var(--color-dark) n'existe pas, remplacé par la variable standard */
+            color: var(--color-text-dark); 
+            font-weight: 500;
+            text-transform: uppercase;
+            animation: textPulse 1.5s ease-in-out infinite;
+        }
+
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots span {
+            animation: dotPulse 1.4s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .loading-dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Particules décoratives dorées */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 4s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 40%; animation-delay: 0.5s; }
+        .particle:nth-child(3) { left: 60%; animation-delay: 1s; }
+        .particle:nth-child(4) { left: 80%; animation-delay: 1.5s; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 10px 25px rgba(168, 126, 53, 0.15)); }
+            50% { filter: drop-shadow(0 15px 35px rgba(168, 126, 53, 0.3)); }
+        }
+        @keyframes circleProgress {
+            0% { stroke-dashoffset: 440; transform: rotate(0deg); }
+            50% { stroke-dashoffset: 110; }
+            100% { stroke-dashoffset: 440; transform: rotate(360deg); }
+        }
+        @keyframes progressBar {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+
+        /* Responsive Preloader */
+        @media (max-width: 768px) {
+            .preloader-logo { width: 150px; }
+            .circle-loader { width: 180px; height: 180px; }
+            .progress-bar-container { width: 150px; }
+            .loading-text { font-size: 12px; }
+        }
+        
+        /* --- FIN STYLES PRELOADER --- */
+
+
+        /* HEADER - Fluidité et Professionnalisme */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(5px);
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all var(--transition-speed) ease-in-out;
+        }
+
+        .header.scrolled {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        /* Utilisation de .header .logo-container pour éviter un conflit avec .preloader-content .logo-container */
+        .header .logo-container {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 15px 0;
+            margin-bottom: 0; /* Annule le style preloader */
+            animation: none; /* Annule l'animation preloader */
+        }
+
+        .header .logo-container img {
+            height: 60px;
+            width: auto;
+            max-width: 280px;
+            object-fit: contain;
+            transition: all var(--transition-speed);
+        }
+
+        /* Navigation DESKTOP */
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--color-text-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+        
+        /* STYLE ACTIF DESKTOP */
+        .nav-links a:hover::after,
+        .nav-links a.active::after { /* Style pour la classe active au clic */
+            width: 100%;
+        }
+
+        .nav-links a.active { /* Style pour la classe active au clic */
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+
+        /* --- STYLES MENU BURGER (Mobile) --- */
+        /* NOUVEAU : Bouton Burger */
+        .menu-toggle {
+            display: none; 
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 1001; /* Doit être au-dessus du menu */
+        }
+
+        .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-text-dark);
+            margin: 4px 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Animation 'X' */
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        
+        @media (max-width: 1024px) {
+            .nav-container {
+                padding: 0 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Afficher le bouton menu burger */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* Styles Menu Mobile */
+            .nav-links {
+                position: fixed;
+                top: 0; 
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--color-secondary); 
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transform: translateX(100%); /* Caché à droite par défaut */
+                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                z-index: 999;
+                padding-top: 50px; /* Espace pour le logo/header */
+            }
+            
+            /* Menu ouvert */
+            .nav-links.active {
+                transform: translateX(0);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+            
+            .nav-links a {
+                color: var(--color-text-light); 
+                font-size: 24px;
+                padding: 15px 0;
+                letter-spacing: 2px;
+                font-weight: 500;
+                text-transform: uppercase;
+                width: 80%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links li:last-child a {
+                border-bottom: none;
+            }
+            
+            .nav-links a::after {
+                content: none; /* Désactiver l'underline au survol par défaut */
+            }
+            
+            /* STYLE ACTIF MOBILE */
+            .nav-links a.active {
+                color: var(--color-primary); 
+                font-weight: 700;
+                transform: scale(1.05);
+                text-shadow: 0 0 10px rgba(168, 126, 53, 0.5);
+            }
+            
+            /* Rétablissement des autres media queries */
+            .nav-container {
+                padding: 0 20px;
+                height: 70px;
+            }
+            
+            .header .logo-container img {
+                height: 50px;
+            }
+            
+            /* Les autres styles responsive restent inchangés */
+            .hero { margin-top: 70px; padding: 60px 20px; background-attachment: scroll; }
+            .hero-content h1 { font-size: 2.5rem; letter-spacing: 5px; }
+            .hero-logo { max-width: 250px; }
+            .hero-content .subtitle { font-size: 1.1rem; letter-spacing: 1px; }
+            .cta-primary, .cta-secondary { display: block; margin: 15px auto; max-width: 300px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .section { padding: 80px 20px; }
+            .section-title { font-size: 2.2rem; letter-spacing: 2px; }
+            .section-subtitle { font-size: 1rem; margin-bottom: 50px; }
+            .about-text h3 { font-size: 2rem; }
+        }
+        /* --- FIN STYLES MENU BURGER --- */
+
+
+        /* Hero Section (restent inchangés) */
+        .hero {
+            background: var(--color-secondary);
+            background-image: url("images/fond.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            margin-top: 90px;
+            padding: 80px 20px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        /* ... autres styles de section ... */
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .hero-logo-container {
+            margin-bottom: 60px;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            margin-bottom: 25px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            line-height: 1.1;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+            color: var(--color-text-light);
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 60px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-primary, .cta-secondary {
+            display: inline-block;
+            padding: 18px 50px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 14px;
+            text-decoration: none;
+            margin-right: 25px;
+            border-radius: 3px;
+        }
+
+        .cta-primary {
+            background: var(--color-primary);
+            color: var(--color-secondary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .cta-primary:hover {
+            background: transparent;
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(168, 126, 53, 0.5);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: var(--color-secondary);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .section {
+            padding: 120px 60px;
+            max-width: 1440px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            color: var(--color-text-dark);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 70px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: var(--color-primary);
+            margin: 25px auto 0;
+            transition: all var(--transition-speed);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: var(--color-background-light);
+            padding: 50px 40px;
+            border: 1px solid #e5e5e5;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(168, 126, 53, 0.05);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease-out;
+            z-index: -1;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            border-color: var(--color-primary);
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: var(--color-text-dark);
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            position: relative;
+        }
+
+        .service-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 0.3s;
+        }
+
+        .service-card:hover h3::after {
+            width: 80px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .service-card li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 1.8;
+            border-bottom: 1px dashed rgba(0,0,0,0.05);
+        }
+        
+        .service-card li:last-child {
+             border-bottom: none;
+        }
+
+        .service-card li::before {
+            content: '✔';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-primary);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .about-section {
+            background: var(--color-background-grey);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: var(--color-text-dark);
+            font-weight: 900;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            position: relative;
+        }
+        
+        .about-text h3::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--color-primary);
+            margin-top: 15px;
+        }
+
+        .about-text p {
+            font-size: 17px;
+            color: #444;
+            margin-bottom: 25px;
+            line-height: 2.0;
+            font-weight: 400;
+            text-align: justify;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 45px 35px;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+            transition: all 0.4s ease;
+            border-radius: 4px;
+        }
+
+        .stat-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--color-primary);
+            letter-spacing: 2px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #222222 100%);
+            color: var(--color-text-light);
+        }
+
+        .contact-section .section-title,
+        .contact-section .section-subtitle {
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 100px;
+            margin-top: 60px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255,255,255,0.6);
+            font-weight: 300;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: rgba(255,255,255,0.12);
+            box-shadow: 0 0 10px rgba(168, 126, 53, 0.4);
+        }
+
+        .contact-form button {
+            background: var(--color-primary);
+            color: var(--color-secondary);
+            padding: 18px 55px;
+            border: 2px solid var(--color-primary);
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 4px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .contact-form button:hover {
+            background: transparent;
+            border-color: white;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--color-primary);
+        }
+
+        .contact-item {
+            margin-bottom: 35px;
+        }
+
+        .contact-item-label {
+            display: block;
+            font-weight: 600;
+            color: var(--color-primary);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .contact-item-value {
+            color: rgba(255,255,255,0.95);
+            font-size: 17px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--color-secondary);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 45px 20px;
+            font-size: 14px;
+            letter-spacing: 0.8px;
+            border-top: 3px solid var(--color-primary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+             .services-grid {
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .nav-container {
+                padding: 0 40px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .about-text p {
+                text-align: left;
+            }
+        }
+
+    </style>
+</head>
+<body onload="setActiveLink('accueil');">
+    <div id="preloader">
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <div class="preloader-content">
+            <div class="logo-container">
+                <svg class="circle-loader" viewBox="0 0 160 160">
+                    <circle cx="80" cy="80" r="70"></circle>
+                </svg>
+
+                <img src="images/logo.png" 
+                     alt="Victor Luther Agency" 
+                     class="preloader-logo"
+                     onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='block';">
+                
+                <div class="logo-fallback" style="display: none; font-size: 24px; font-weight: 700; letter-spacing: 5px; color: var(--color-primary);">
+                    VL AGENCY
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+
+            <div class="loading-text">
+                Chargement<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+            </div>
+        </div>
+    </div>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="Victor Luther Agency & Services" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%2260%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 letter-spacing=%223%22 fill=%22%231a1a1a%22%3EVICTOR LUTHER%3C/text%3E%3C/svg%3E';">
+            </div>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" data-target="accueil">Accueil</a></li> 
+                <li><a href="apropos.html" data-target="apropos">À Propos</a></li>
+                <li><a href="services.html" data-target="services">Services</a></li>
+                <li><a href="contact.html" data-target="contact">Contact</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+        </nav>
+    </header>
+
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <div class="hero-logo-container">
+         </div>
+            <h1>Excellence & Expertise</h1>
+            <p class="subtitle">Solutions immobilières intégrées et services premium pour une clientèle exigeante</p>
+            <div>
+                <a href="services.html" class="cta-primary">Nos Services</a>
+                <a href="contact.html" class="cta-secondary">Nous Contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <h2 class="section-title">Nos Services</h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Des solutions complètes pour tous vos besoins immobiliers et services connexes</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Gestion Immobilière</h3>
+                <ul>
+                    <li>Gestion locative complète et optimisée</li>
+                    <li>Administration de copropriétés</li>
+                    <li>Suivi technique et financier rigoureux</li>
+                    <li>Optimisation des revenus locatifs</li>
+                    <li>Relations propriétaires-locataires</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Promotion Immobilière</h3>
+                <ul>
+                    <li>Acquisition et cession de biens</li>
+                    <li>Commercialisation de programmes neufs</li>
+                    <li>Bureaux et espaces professionnels</li>
+                    <li>Locaux commerciaux stratégiques</li>
+                    <li>Accompagnement personnalisé</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Conseil & Expertise</h3>
+                <ul>
+                    <li>Stratégie d'investissement immobilier</li>
+                    <li>Gestion de projets complexes</li>
+                    <li>Diagnostic et évaluation patrimoniale</li>
+                    <li>Études de faisabilité approfondies</li>
+                    <li>Orientation stratégique sur mesure</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Location de Véhicules</h3>
+                <ul>
+                    <li>Flotte de véhicules haut de gamme</li>
+                    <li>Location courte et longue durée</li>
+                    <li>Services de courses commandées</li>
+                    <li>Chauffeurs professionnels qualifiés</li>
+                    <li>Solutions personnalisées 24/7</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Ameublement Premium</h3>
+                <ul>
+                    <li>Décoration d'intérieur sur mesure</li>
+                    <li>Aménagement résidentiel complet</li>
+                    <li>Design d'espaces professionnels</li>
+                    <li>Mobilier haut de gamme sélectionné</li>
+                    <li>Projets clés en main coordonnés</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Événementiel</h3>
+                <ul>
+                    <li>Location d'espaces prestigieux</li>
+                    <li>Organisation événementielle intégrale</li>
+                    <li>Coordination logistique experte</li>
+                    <li>Prestations corporate et privées</li>
+                    <li>Gestion complète de A à Z</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="apropos" class="section about-section">
+        <h2 class="section-title">À Propos</h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">L'excellence au service de vos ambitions</p>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Votre Partenaire de Confiance</h3>
+                <p>Victor Luther Agency & Services s'impose comme un acteur de référence dans le secteur immobilier et des services premium. Notre expertise pluridisciplinaire nous permet d'offrir un accompagnement complet et personnalisé à une clientèle exigeante.</p>
+                <p>Forte d'une équipe de professionnels hautement qualifiés et d'une approche résolument centrée sur l'excellence, notre agence développe des solutions innovantes qui répondent aux enjeux contemporains du marché immobilier et des services associés.</p>
+                <p>Notre engagement : vous offrir un service irréprochable, une expertise reconnue et un accompagnement sur mesure pour concrétiser vos projets les plus ambitieux avec rigueur et professionnalisme.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Clients Satisfaits</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Projets Réalisés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Années d'Expertise</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfaction Client</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+        <h2 class="section-title">Contactez-Nous</h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Parlons de votre projet</p>
+        
+        <div class="contact-grid">
+            <div class="contact-form">
+                <form onsubmit="event.preventDefault(); alert('Merci pour votre message. Notre équipe vous contactera dans les plus brefs délais.');">
+                    <input type="text" placeholder="Nom complet" required>
+                    <input type="email" placeholder="Adresse email professionnelle" required>
+                    <input type="tel" placeholder="Numéro de téléphone" required>
+                    <textarea rows="6" placeholder="Décrivez votre projet ou vos besoins" required></textarea>
+                    <button type="submit">Envoyer le Message</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3>Informations de Contact</h3>
+                <div class="contact-item">
+                    <span class="contact-item-label">Adresse</span>
+                    <span class="contact-item-value">N'Djamena, République du Tchad</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-item-label">Téléphone</span>
+                    <span class="contact-item-value">+235 XX XX XX XX</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-item-label">Email</span>
+                    <span class="contact-item-value">contact@victorluther.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-item-label">Horaires</span>
+                    <span class="contact-item-value">Lundi - Samedi<br>8h00 - 18h00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Victor Luther Agency & Services. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Fonction utilitaire pour gérer la classe active
+        function setActiveLink(targetId) {
+            const navLinksList = document.querySelectorAll('#nav-links a');
+            navLinksList.forEach(link => {
+                link.classList.remove('active');
+            });
+            // Trouver le lien correspondant à l'ID cible et lui ajouter la classe 'active'
+            const correspondingLink = document.querySelector(`#nav-links a[data-target="${targetId}"]`);
+            if (correspondingLink) {
+                correspondingLink.classList.add('active');
+            }
+        }
+        
+        // --- INITIALISATION (S'assure que 'Accueil' est actif au chargement) ---
+        // La fonction setActiveLink('accueil'); est appelée via l'attribut 'onload' du <body>
+
+
+        // --- GESTION DU PRELOADER (Défilement garanti) ---
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            const body = document.body;
+            
+            setTimeout(function() {
+                preloader.classList.add('loaded');
+                
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                    // CORRECTION MAJEURE: Force le défilement du body à être visible
+                    body.style.overflow = 'visible'; 
+                }, 800);
+            }, 500); 
+        });
+
+
+        // --- GESTION DU MENU BURGER ET DU SCROLL MOBILE ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const body = document.body;
+        const preloader = document.getElementById('preloader'); 
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function() {
+                const isActive = this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                
+                // Gère le blocage/déblocage du scroll pour le menu mobile
+                if (isActive) {
+                    body.style.overflow = 'hidden';
+                } else if (preloader.style.display === 'none') {
+                    // Force le défilement visible après la fermeture du menu
+                    body.style.overflow = 'visible'; 
+                }
+            });
+        }
+        
+        
+        // --- GESTION DE LA CLASSE ACTIVE (AU CLIC SEULEMENT) ET DU SMOOTH SCROLLING ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const href = this.getAttribute('href');
+                const targetId = href.substring(1); // Enlève le '#'
+                const target = document.querySelector(href);
+                
+                if (target) {
+                    // 1. Gère le Smooth Scroll (défilement fluide)
+                    const headerOffset = 90;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 2. Gère la Classe Active au clic
+                    setActiveLink(targetId);
+
+                    // 3. Fermer le menu mobile après le clic
+                    if (window.innerWidth <= 768) {
+                        menuToggle.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        body.style.overflow = 'visible'; 
+                    }
+                }
+            });
+        });
+        // --- FIN CLASSE ACTIVE/SMOOTH SCROLLING ---
+        
+
+        // Header scroll effect and Section visibility for Fluidity (MAINTENU)
+        const sections = document.querySelectorAll('.section');
+        const header = document.querySelector('.header');
+        
+        function checkVisibility() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                // Rendre la section visible (animation d'apparition) quand elle est à 80% de la hauteur de la fenêtre
+                if (sectionTop < window.innerHeight * 0.8) { 
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            
+            // Header shadow effect
+            if (currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            checkVisibility(); // Vérifier la visibilité (pour l'animation d'apparition)
+        });
+        
+        // Initial check for sections already in view
+        window.addEventListener('load', checkVisibility);
+        checkVisibility();
+
+        // Fallback for image (MAINTENU)
+        document.querySelector('.header .logo-container img').addEventListener('error', function() {
+            this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%2260%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Montserrat%22 font-size=%2220%22 font-weight=%22700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 letter-spacing=%223%22 fill=%22%231a1a1a%22%3EVICTOR LUTHER%3C/text%3E%3C/svg%3E';
+        });
+
+    </script>
+</body>
+</html>
